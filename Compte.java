@@ -1,12 +1,17 @@
 import java.util.Scanner;
+import java.util.*;
+import java.rmi.*;
+import java.net.*;
 
-public class Compte
+
+public class ImpCompte extends UnicastRemoteObject implements Compte {
 {
             private String nCp;
             private String nom;
-            private String premon;
+            private String prenom;
             private int solde;
             private List<String> listeOp;
+
     
             public String getNCp()
             {
@@ -24,13 +29,19 @@ public class Compte
             {
                 return this.solde;
             }
+            public void setSolde(int i)
+            {
+                this.solde=i;
+            }
+
             public List<String> getListeOp()
             {
                 return this.listeOp;
             }
 
-            public Compte(String cp,String n, String p, int s, List<> L)
+            public ImpCompte(String cp,String n, String p, int s, List<String> L) throws RemoteException
             {
+                super();
                 this.nCp= cp;
                 this.nom= n;
                 this.prenom= p;
@@ -38,35 +49,56 @@ public class Compte
                 this.listeOp= L;
             }
 
+            public ImpCompte(String cp,String n, String p, int s) throws RemoteException
+            {
+                super();
+                this.nCp= cp;
+                this.nom= n;
+                this.prenom= p;
+                this.solde= s;
+                this.listeOp=new ArrayList<String>();
+            }
+
+            public ImpCompte(String cp) throws RemoteException
+            {
+                super();
+                this.nCp= cp;
+                this.nom= "";
+                this.prenom= "";
+                this.solde= 0;
+                this.listeOp= new ArrayList<String>();
+            }
+
             public void Depot(int somme)
    		    {
        		System.out.println("Vous avez effectuée un dépot de: " + somme + "€");
-        	c.setSolde(c.getSolde()+somme);
-        	this.ListeOp.add("Dépot de "+somme+"€");
+        	this.setSolde(this.getSolde()+somme);
+        	this.listeOp.add("Dépot de "+somme+"€");
     		}
     
     	    public void Retrait(int somme)
     		{
     			System.out.println("Vous avez effectuée un débit de: " + somme + "€");
-        		c.setSolde(c.getSolde()-somme);
-        		this.ListeOp.add("Retrait de "+somme+"€");
+        		this.setSolde(this.getSolde()-somme);
+        		this.listeOp.add("Retrait de "+somme+"€");
     		}
     
     	    public void Consultation()
     		{
-        		this.type="Consultation";
-        		System.out.println("Votre solde est de: "+c.getSolde() + "€");
-                this.ListeOp.add("Consultation du solde, "+somme+"€");
+        		System.out.println("Votre solde est de: "+this.getSolde() + "€");
+                this.listeOp.add("Consultation du solde");
     		}
 
 
             public static void main(String args[])throws Exception
             {     
-                
-	    }
-
-
-            
-            
-
+                try {
+                ImpCompte s = new ImpCompte();
+                String nom = "objecthello";
+                Naming.rebind(nom, s); // enregistrement
+                System.out.println("Serveur enregistré.");
+                } catch (Exception e) {
+                System.err.println("Erreur : " + e);
+                }
+	        }
 }

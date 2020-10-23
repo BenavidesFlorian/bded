@@ -2,10 +2,11 @@ import java.util.Scanner;
 import java.util.*;
 import java.rmi.*;
 import java.net.*;
+import java.rmi.server.*;
 
 
 public class ImpCompte extends UnicastRemoteObject implements Compte {
-{
+
             private String nCp;
             private String nom;
             private String prenom;
@@ -37,6 +38,11 @@ public class ImpCompte extends UnicastRemoteObject implements Compte {
             public List<String> getListeOp()
             {
                 return this.listeOp;
+            }
+
+            public ImpCompte() throws RemoteException
+            {
+                super();
             }
 
             public ImpCompte(String cp,String n, String p, int s, List<String> L) throws RemoteException
@@ -88,13 +94,19 @@ public class ImpCompte extends UnicastRemoteObject implements Compte {
         		System.out.println("Votre solde est de: "+this.getSolde() + "€");
                 this.listeOp.add("Consultation du solde");
     		}
+    
+            public void ConsultationOp()
+    		{
+        		System.out.println("Voici vos dernieres operations: "+this.getListeOp().toString());
+                this.listeOp.add("Consultation des operations");
+    		}
 
 
             public static void main(String args[])throws Exception
-            {     
+            {   
                 try {
                 ImpCompte s = new ImpCompte();
-                String nom = "objecthello";
+                String nom = "objectcompte";
                 Naming.rebind(nom, s); // enregistrement
                 System.out.println("Serveur enregistré.");
                 } catch (Exception e) {

@@ -13,6 +13,9 @@ public interface Operations{
     }
     
     public Operations()
+    {
+        this.c=c;
+        this.type="";
     
     public void Depot(int somme)
     {

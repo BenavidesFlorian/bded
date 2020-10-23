@@ -7,7 +7,7 @@ public class Compte
             private String nom;
             private String premon;
             private int solde;
-            private List<String> liste;
+            private List<String> listeOp;
     
             public String getNCp()
             {
@@ -25,9 +25,9 @@ public class Compte
             {
                 return this.solde;
             }
-            public List<Operations> getListe()
+            public List<String> getListeOp()
             {
-                return this.liste;
+                return this.listeOp;
             }
 
             public Compte(String cp,String n, String p, int s, List<> L)
@@ -36,27 +36,28 @@ public class Compte
                 this.nom= n;
                 this.prenom= p;
                 this.solde= s;
-                this.Liste= L;
+                this.listeOp= L;
             }
 
             public void Depot(int somme)
-   		{
+   		    {
        		System.out.println("Vous avez effectuée un dépot de: " + somme + "€");
         	c.setSolde(c.getSolde()+somme);
-        	this.
+        	this.ListeOp.add("Dépot de "+somme+"€");
     		}
     
     	    public void Retrait(int somme)
     		{
     			System.out.println("Vous avez effectuée un débit de: " + somme + "€");
         		c.setSolde(c.getSolde()-somme);
-        		this.type="Retrait";
+        		this.ListeOp.add("Retrait de "+somme+"€");
     		}
     
     	    public void Consultation()
     		{
         		this.type="Consultation";
         		System.out.println("Votre solde est de: "+c.getSolde() + "€");
+                this.ListeOp.add("Consultation du solde, "+somme+"€");
     		}
 
 

@@ -1,5 +1,4 @@
 import java.util.Scanner;
-package Banque;
 
 public class Compte
 {

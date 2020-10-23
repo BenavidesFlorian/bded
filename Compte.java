@@ -7,7 +7,7 @@ public class Compte
             private String nom;
             private String premon;
             private int solde;
-            private List<Operations> liste;
+            private List<String> liste;
     
             public String getNCp()
             {
@@ -39,21 +39,31 @@ public class Compte
                 this.Liste= L;
             }
 
-            public Operation(String opNom, int somme)
-            {
-                OperationFactory opFact = new OperationFactory();
-
-                //get an object of Circle and call its draw method.
-                 op = OperationFactory.getOperation(opNom);
-                 this.solde=op.operation(this, somme);
-
-            }
+            public void Depot(int somme)
+   		{
+       		System.out.println("Vous avez effectuée un dépot de: " + somme + "€");
+        	c.setSolde(c.getSolde()+somme);
+        	this.
+    		}
+    
+    	    public void Retrait(int somme)
+    		{
+    			System.out.println("Vous avez effectuée un débit de: " + somme + "€");
+        		c.setSolde(c.getSolde()-somme);
+        		this.type="Retrait";
+    		}
+    
+    	    public void Consultation()
+    		{
+        		this.type="Consultation";
+        		System.out.println("Votre solde est de: "+c.getSolde() + "€");
+    		}
 
 
             public static void main(String args[])throws Exception
             {     
                 
-			}
+	    }
 
 
             

@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.util.*;
 import java.rmi.*;
 import java.net.*;
@@ -43,6 +42,11 @@ public class ImpCompte extends UnicastRemoteObject implements Compte {
             public ImpCompte() throws RemoteException
             {
                 super();
+                this.nCp= "1";
+                this.nom= "Beltramo";
+                this.prenom= "Emeric";
+                this.solde= 0;
+                this.listeOp=new ArrayList<String>();
             }
 
             public ImpCompte(String cp,String n, String p, int s, List<String> L) throws RemoteException
@@ -75,30 +79,35 @@ public class ImpCompte extends UnicastRemoteObject implements Compte {
                 this.listeOp= new ArrayList<String>();
             }
 
-            public void Depot(int somme)
+            public String Depot(int somme)
    		    {
-       		System.out.println("Vous avez effectuée un dépot de: " + somme + "€");
+       		
         	this.setSolde(this.getSolde()+somme);
         	this.listeOp.add("Dépot de "+somme+"€");
+            String message = "Vous avez effectuée un dépot de: " + somme + "€";
+            return message;
     		}
     
-    	    public void Retrait(int somme)
+    	    public String Retrait(int somme)
     		{
-    			System.out.println("Vous avez effectuée un débit de: " + somme + "€");
+    			String message = "Vous avez effectuée un débit de: " + somme + "€";
         		this.setSolde(this.getSolde()-somme);
         		this.listeOp.add("Retrait de "+somme+"€");
+                return message;
     		}
     
-    	    public void Consultation()
+    	    public String Consultation()
     		{
-        		System.out.println("Votre solde est de: "+this.getSolde() + "€");
+        		String message = "Votre solde est de: "+this.getSolde() + "€";
                 this.listeOp.add("Consultation du solde");
+                return message;
     		}
     
-            public void ConsultationOp()
+            public String ConsultationOp()
     		{
-        		System.out.println("Voici vos dernieres operations: "+this.getListeOp().toString());
+        		String message = "Voici vos dernieres operations: "+this.getListeOp().toString();
                 this.listeOp.add("Consultation des operations");
+                return message;
     		}
 
 

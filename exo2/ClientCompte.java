@@ -42,30 +42,28 @@ public class ClientCompte {
                                    "6 : Quitter\n\n";
                     System.out.println(menu);
                     choix = scanner.nextInt();
-                    int montant=0;
+                    float montant=0;
                     String message = "";
                     switch(choix) {
                     case 0:
-                    message = "fermeture ...";
+                    message = b.getListCompte().toString();
                     break;
                     case 1:
                     System.out.println("Numéro du compte:");
                     montant = scanner.nextInt();
-                    b.CreationCompte(montant);
+                    b.CreationCompte((int)montant);
                     break;
                     case 2:
-                    //b.SelectionCompte(1));
                     c=getCompte(b);
                     System.out.println("Montant de la transaction:");
-                    montant = scanner.nextInt();
+                    montant = scanner.nextFloat();
                     message = c.Depot(montant);
                     break;
                     case 3:
                     c=getCompte(b);
                     System.out.println("Montant de la transaction:");
-                    montant = scanner.nextInt();
+                    montant = scanner.nextFloat();
                     message = c.Retrait(montant);
-                    //b.SaveCompte(c);
                     break;
                     case 4:
                     c=getCompte(b);

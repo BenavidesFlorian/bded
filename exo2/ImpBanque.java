@@ -6,6 +6,10 @@ import java.rmi.server.*;
 public class ImpBanque extends UnicastRemoteObject implements Banque {
     private List<ImpCompte> listCompte;
 
+    public List<ImpCompte> getListCompte() throws RemoteException{
+        return listCompte;    
+    }
+    
     public ImpBanque() throws RemoteException {
         super();
         this.listCompte = new ArrayList<ImpCompte>();
